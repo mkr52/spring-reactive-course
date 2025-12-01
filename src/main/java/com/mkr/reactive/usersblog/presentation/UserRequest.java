@@ -23,7 +23,7 @@ public class UserRequest {
             requiredMode = Schema.RequiredMode.REQUIRED)
     private String email;
     @NotBlank(message = "Password is required")
-    @Size(min = 8, max = 16, message = "Password must be at least 6 characters and at most 16 characters")
+    @Size(min = 8, max = 16, message = "Password must be at least 8 characters and at most 16 characters")
     @Schema(example = "P@ssw0rd!", description = "The user's password", minLength = 8, maxLength = 16,
             requiredMode = Schema.RequiredMode.REQUIRED)
     private String password;
