@@ -22,25 +22,12 @@ public class UserController {
     }
 
     @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
     public Mono<ResponseEntity<UserRest>> create(@RequestBody @Valid Mono<UserRequest> user) {
         return userService.createUser(user)
                 .map((userRest -> ResponseEntity
                         .status(HttpStatus.CREATED)
                         .location(URI.create("/users/" + userRest.getId()))
                         .body(userRest)));
-//        return user
-//                .map(request ->
-//                        new UserRest(UUID.randomUUID(),
-//                                request.getFirstName(),
-//                                request.getLastName(),
-//                                request.getEmail())
-//                )
-//                .map(userRest ->
-//                        ResponseEntity
-//                                .status(HttpStatus.CREATED)
-//                                .location(URI.create("/users/" + userRest.getId()))
-//                                .body(userRest));
     }
 
     @GetMapping("/{userId}")
@@ -48,12 +35,6 @@ public class UserController {
         return userService.getUserById(userId)
                 .map(ResponseEntity::ok)
                 .switchIfEmpty(Mono.just(ResponseEntity.notFound().build()));
-//        return Mono.just(new UserRest(
-//                userId,
-//                "John",
-//                "Cena",
-//                "te@test.com"
-//        )).map(ResponseEntity::ok);
     }
 
     @GetMapping
