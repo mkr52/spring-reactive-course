@@ -38,11 +38,8 @@ public class UserController {
     }
 
     @GetMapping
-    public Flux<ResponseEntity<UserRest>> getUsers(@RequestParam("offset") int offset,
-                                                   @RequestParam("limit") int limit) {
-        return Flux.just(
-                new UserRest(UUID.randomUUID(), "John", "Cena", "tes@test.com"),
-                new UserRest(UUID.randomUUID(), "Jane", "Doe", "jane@do.com")
-        ).map(ResponseEntity::ok);
+    public Flux<UserRest> getUsers(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                   @RequestParam(value = "limit", defaultValue = "50") int limit) {
+        return userService.findAllUsers(page, limit);
     }
 }
