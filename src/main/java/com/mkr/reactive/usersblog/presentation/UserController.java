@@ -1,5 +1,8 @@
 package com.mkr.reactive.usersblog.presentation;
 
+import com.mkr.reactive.usersblog.config.BuildInfo;
+import com.mkr.reactive.usersblog.presentation.model.UserRequest;
+import com.mkr.reactive.usersblog.presentation.model.UserRest;
 import com.mkr.reactive.usersblog.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -17,8 +20,11 @@ public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    private final BuildInfo buildInfo;
+
+    public UserController(UserService userService, BuildInfo buildInfo) {
         this.userService = userService;
+        this.buildInfo = buildInfo;
     }
 
     @PostMapping
@@ -42,4 +48,16 @@ public class UserController {
                                                    @RequestParam(value = "limit", defaultValue = "50") int limit) {
         return userService.findAllUsers(page, limit);
     }
+
+    // Add controller mapping to display build info properties
+    @GetMapping("/info")
+    public Mono<ResponseEntity<String>> getBuildInfo() {
+        System.out.println(buildInfo.getVersion());
+        String result = String.format("Version: %s, Url: %s, Key: %s",
+                buildInfo.getVersion(),
+                buildInfo.getUrl(),
+                buildInfo.getKey());
+        return Mono.just(ResponseEntity.ok(result));
+    }
+
 }

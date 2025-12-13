@@ -1,4 +1,4 @@
-package com.mkr.reactive.usersblog.presentation;
+package com.mkr.reactive.usersblog.presentation.model;
 
 import java.util.UUID;
 

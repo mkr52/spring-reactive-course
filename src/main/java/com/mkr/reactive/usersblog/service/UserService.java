@@ -1,7 +1,7 @@
 package com.mkr.reactive.usersblog.service;
 
-import com.mkr.reactive.usersblog.presentation.UserRequest;
-import com.mkr.reactive.usersblog.presentation.UserRest;
+import com.mkr.reactive.usersblog.presentation.model.UserRequest;
+import com.mkr.reactive.usersblog.presentation.model.UserRest;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
